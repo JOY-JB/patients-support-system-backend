@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -9,3 +6,99 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Doctor {
+  id             Int       @id @default(autoincrement())
+  name           String
+  specialization String
+  email          String    @unique
+  age            Int
+  password       String
+  
+  patients         Patient[]
+  prescriptions     Prescription[]
+}
+
+model Patient {
+  id                Int       @id @default(autoincrement())
+  name              String
+  age               Int
+  phoneNumber       String @unique
+  address           String
+  
+  doctor           Doctor @relation(fields: [id],references: [id])
+  prescriptions     Prescription?
+  primaryQuestionForms PrimaryQuestionForm?
+}
+
+model Receptionist {
+  id               Int       @id @default(autoincrement())
+  name             String
+  email            String    @unique
+  age              Int
+  password         String
+
+  primaryQuestionForms PrimaryQuestionForm[]
+}
+
+model Prescription {
+  id               Int       @id @default(autoincrement())
+  patientId        Int  @unique
+  doctorId         Int
+  content          String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  
+  patient          Patient   @relation(fields: [patientId], references: [id])
+  doctor           Doctor    @relation(fields: [doctorId], references: [id])
+}
+
+model PrimaryQuestionForm {
+  id               Int       @id @default(autoincrement())
+  receiptionistId  Int
+  patientId        Int  @unique
+  previousIssues   String[]
+  previousConsultant String
+  currentIssues    String
+  sleepMode        String
+  depression       String[]
+  ocd              String[]
+  recommendation   String
+  
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  
+  patient          Patient   @relation(fields: [patientId], references: [id])
+  receptionist     Receptionist @relation(fields: [receiptionistId], references: [id])
+}
+
+
+
+// erDiagram
+//   Doctor "1" -- "1..*" Patient
+//   Doctor "1" -- "1..*" Prescription
+//   Patient "1" -- "1" PrimaryQuestionForm
+//   Patient "1" -- "0..1" Prescription
+//   Receptionist "1" -- "0..*" PrimaryQuestionForm: Creates
+
+
+// Doctor - Patient Relationship:
+
+// Doctor has a one-to-many relationship with Patient.
+// One Doctor can have many Patients, but each Patient belongs to only one Doctor.
+// Doctor - Prescription Relationship:
+
+// Doctor has a one-to-many relationship with Prescription.
+// One Doctor can create many Prescriptions, but each Prescription is associated with only one Doctor.
+// Patient - Prescription Relationship:
+
+// Patient has a one-to-one relationship with Prescription.
+// Each Patient can have at most one Prescription, and each Prescription is associated with only one Patient.
+// Receptionist - PrimaryQuestionForm Relationship:
+
+// Receptionist has a one-to-many relationship with PrimaryQuestionForm.
+// One Receptionist can create multiple PrimaryQuestionForms, but each PrimaryQuestionForm is associated with only one Receptionist.
+// Patient - PrimaryQuestionForm Relationship:
+
+// Patient has a one-to-one relationship with PrimaryQuestionForm.
+// Each Patient can have at most one PrimaryQuestionForm, and each PrimaryQuestionForm is associated with only one Patient.
