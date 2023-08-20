@@ -1,4 +1,3 @@
-// services/prescription.service.js
 import { Prescription, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
