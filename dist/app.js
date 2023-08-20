@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const cors_1 = __importDefault(require("cors"));
+const express_1 = __importDefault(require("express"));
+const doctor_route_1 = require("./modules/doctor/doctor.route");
+const patient_route_1 = require("./modules/patient/patient.route");
+const prescription_route_1 = require("./modules/prescription/prescription.route");
+const primaryQuestionForm_route_1 = require("./modules/primaryQuestionForm/primaryQuestionForm.route");
+const receptionist_route_1 = require("./modules/receptionist/receptionist.route");
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cors_1.default)());
+app.use(express_1.default.urlencoded({ extended: true }));
+app.use("/api/v1/doctor", doctor_route_1.doctorRoutes);
+app.use("/api/v1/patient", patient_route_1.patientRoutes);
+app.use("/api/v1/prescription", prescription_route_1.prescriptionRoutes);
+app.use("/api/v1/receptionist", receptionist_route_1.receptionistRoutes);
+app.use("/api/v1/primaryQuestionForm", primaryQuestionForm_route_1.primaryQuestionFormRoutes);
+exports.default = app;
