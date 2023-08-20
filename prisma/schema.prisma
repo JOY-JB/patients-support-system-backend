@@ -17,6 +17,7 @@ model Doctor {
   
   patients         Patient[]
   prescriptions     Prescription[]
+  
   @@map("doctors")
 }
 
