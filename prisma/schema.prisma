@@ -53,7 +53,6 @@ model Prescription {
   doctorId         Int
   content          String
   createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
   
   patient          Patient   @relation(fields: [patientId], references: [id])
   doctor           Doctor    @relation(fields: [doctorId], references: [id])
@@ -74,7 +73,6 @@ model PrimaryQuestionForm {
   recommendation   String
   
   createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
   
   patient          Patient   @relation(fields: [patientId], references: [id])
   receptionist     Receptionist @relation(fields: [receiptionistId], references: [id])
