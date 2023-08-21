@@ -11,7 +11,13 @@ const createReceptionist = async (data: Receptionist) => {
 
 const getAllReceptionists = async () => {
   const receptionists = await prisma.receptionist.findMany();
-  return receptionists;
+
+  const receptionistsWithoutPassword = receptionists.map((rec) => {
+    const { password, ...receptionistsWithoutPassword } = rec;
+    return receptionistsWithoutPassword;
+  });
+
+  return receptionistsWithoutPassword;
 };
 
 const getSingleReceptionist = async (id: number) => {
@@ -20,6 +26,7 @@ const getSingleReceptionist = async (id: number) => {
       id,
     },
   });
+
   return receptionist;
 };
 

@@ -10,9 +10,15 @@ const addDoctor = async (data: Doctor): Promise<Doctor> => {
   return result;
 };
 
-const getAllDoctors = async (): Promise<Doctor[]> => {
+const getAllDoctors = async () => {
   const doctors = await prisma.doctor.findMany();
-  return doctors;
+
+  const doctorsWithoutPassword = doctors.map((doctor) => {
+    const { password, ...doctorWithoutPassword } = doctor;
+    return doctorWithoutPassword;
+  });
+
+  return doctorsWithoutPassword;
 };
 
 export const doctorService = {
