@@ -55,16 +55,18 @@ VALUES
   (9, 9, 'Prescription for antibiotics. Finish entire course.'),
   (10, 10, 'Medication for anxiety. Take as directed.');
 
--- Insert 10 Primary Question Forms
+-- TRUNCATE TABLE "primaryQuestionForm";
+-- DROP TABLE "primaryQuestionForm";
+
 INSERT INTO "primaryQuestionForm" ("receiptionistId", "patientId", "previousIssues", "previousConsultant", "currentIssues", "sleepMode", "depression", "ocd", "recommendation")
 VALUES
-  (1, 1, '{"Allergies", "Headaches"}', 'Dr. Lee', 'Shortness of breath', 'Normal', '{}', '{}', 'Rest and monitor'),
-  (2, 2, '{"Sprained ankle"}', 'Dr. Johnson', 'Back pain', 'Insomnia', '{}', '{}', 'Physical therapy'),
-  (3, 3, '{"Eczema"}', 'Dr. White', 'Skin irritation', 'Normal', '{}', '{}', 'Apply cream as directed'),
-  (4, 4, '{"Cold symptoms"}', 'Dr. Green', 'Congestion, cough', 'Normal', '{}', '{}', 'Rest and stay hydrated'),
-  (5, 5, '{"Headaches"}', 'Dr. Taylor', 'Frequent headaches', 'Normal', '{}', '{}', 'Take pain reliever as needed'),
-  (6, 6, '{"Allergies"}', 'Dr. Walker', 'Sneezing, itching', 'Normal', '{}', '{}', 'Avoid allergens'),
-  (7, 7, '{"Dry eyes"}', 'Dr. Clark', 'Dryness, irritation', 'Normal', '{}', '{}', 'Use eye drops regularly'),
-  (8, 8, '{"Hormone imbalance"}', 'Dr. Martinez', 'Mood swings, fatigue', 'Normal', '{}', '{}', 'Follow medication schedule'),
-  (9, 9, '{"Infection"}', 'Dr. Turner', 'Fever, sore throat', 'Normal', '{}', '{}', 'Finish antibiotic course'),
-  (10, 10, '{"Anxiety"}', 'Dr. Adams', 'Nervousness, restlessness', 'Normal', '{}', '{}', 'Take medication as directed');
+  (1, 1, '{"Anxiety", "Depression"}', 'Dr. Smith', 'Trouble sleeping', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Try relaxation techniques and establish a sleep routine.'),
+  (2, 2, '{"Headaches"}', 'Dr. Johnson', 'Back pain', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Physical therapy and rest.'),
+  (3, 3, '{"Eczema"}', 'Dr. White', 'Skin irritation', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Apply prescribed cream as directed.'),
+  (4, 4, '{"Cold symptoms"}', 'Dr. Green', 'Congestion, cough', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Rest, stay hydrated, and monitor symptoms.'),
+  (5, 5, '{"Headaches"}', 'Dr. Taylor', 'Frequent headaches', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Take over-the-counter pain reliever as needed.'),
+  (6, 6, '{"Allergies"}', 'Dr. Walker', 'Sneezing, itching', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Avoid allergens and take allergy medication.'),
+  (7, 7, '{"Dry eyes"}', 'Dr. Clark', 'Dryness, irritation', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Use preservative-free eye drops regularly.'),
+  (8, 8, '{"Fatigue"}', 'Dr. Martinez', 'Low energy, mood swings', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Follow balanced diet, exercise, and sleep routine.'),
+  (9, 9, '{"Throat pain"}', 'Dr. Turner', 'Sore throat, difficulty swallowing', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Rest, warm saltwater gargles, and hydrate.'),
+  (10, 10, '{"Anxiety"}', 'Dr. Adams', 'Nervousness, restlessness', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Practice mindfulness, consider therapy.');
