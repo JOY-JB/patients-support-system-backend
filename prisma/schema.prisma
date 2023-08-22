@@ -27,8 +27,11 @@ model Patient {
   age               Int
   phoneNumber       String @unique
   address           String
-  
-  doctor           Doctor @relation(fields: [id],references: [id])
+  doctorId          Int
+
+
+  doctor   Doctor @relation(fields: [doctorId], references: [id])
+
   prescriptions     Prescription?
   primaryQuestionForms PrimaryQuestionForm?
 
@@ -47,23 +50,25 @@ model Receptionist {
   @@map("receptionists")
 }
 
+
 model Prescription {
   id               Int       @id @default(autoincrement())
-  patientId        Int  @unique
+  patientId        Int        @unique
   doctorId         Int
   content          String
-  createdAt        DateTime  @default(now())
   
+  createdAt        DateTime  @default(now())
   patient          Patient   @relation(fields: [patientId], references: [id])
   doctor           Doctor    @relation(fields: [doctorId], references: [id])
 
   @@map("prescriptions")
 }
 
+
 model PrimaryQuestionForm {
   id               Int       @id @default(autoincrement())
-  receiptionistId  Int
-  patientId        Int  @unique
+  receptionistId   Int
+  patientId        Int      @unique
   previousIssues   String[]
   previousConsultant String
   currentIssues    String
@@ -73,40 +78,8 @@ model PrimaryQuestionForm {
   recommendation   String
   
   createdAt        DateTime  @default(now())
-  
   patient          Patient   @relation(fields: [patientId], references: [id])
-  receptionist     Receptionist @relation(fields: [receiptionistId], references: [id])
+  receptionist     Receptionist @relation(fields: [receptionistId], references: [id])
 
   @@map("primaryQuestionForm")
 }
-
-
-
-// erDiagram
-//   doctors "1" -- "1..*" patients
-//   doctors "1" -- "1..*" prescriptions
-//   patients "1" -- "1" primaryQuestionForm
-//   patients "1" -- "0..1" prescriptions
-//   receptionists "1" -- "0..*" primaryQuestionForm
-
-
-// Doctor - Patient Relationship:
-
-// Doctor has a one-to-many relationship with Patient.
-// One Doctor can have many Patients, but each Patient belongs to only one Doctor.
-// Doctor - Prescription Relationship:
-
-// Doctor has a one-to-many relationship with Prescription.
-// One Doctor can create many Prescriptions, but each Prescription is associated with only one Doctor.
-// Patient - Prescription Relationship:
-
-// Patient has a one-to-one relationship with Prescription.
-// Each Patient can have at most one Prescription, and each Prescription is associated with only one Patient.
-// Receptionist - PrimaryQuestionForm Relationship:
-
-// Receptionist has a one-to-many relationship with PrimaryQuestionForm.
-// One Receptionist can create multiple PrimaryQuestionForms, but each PrimaryQuestionForm is associated with only one Receptionist.
-// Patient - PrimaryQuestionForm Relationship:
-
-// Patient has a one-to-one relationship with PrimaryQuestionForm.
-// Each Patient can have at most one PrimaryQuestionForm, and each PrimaryQuestionForm is associated with only one Patient.

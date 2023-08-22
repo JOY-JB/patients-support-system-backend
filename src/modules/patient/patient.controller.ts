@@ -4,7 +4,7 @@ import { patientService } from "./patient.service";
 
 const createPatient = async (req: Request, res: Response) => {
   try {
-    const patientData = req.body;
+    const { ...patientData } = req.body;
 
     const createdPatient = await patientService.createPatient(patientData);
 

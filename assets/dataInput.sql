@@ -13,18 +13,18 @@ VALUES
   ('Dr. Karen Adams', 'Psychiatry', 'karen.adams@example.com', 39, 'psych789');
 
 -- Insert 10 Patients
-INSERT INTO patients ("name", "age", "phoneNumber", "address")
-VALUES
-  ('Alice Roberts', 30, '123-456-7890', '123 Main St, Cityville'),
-  ('Bob Anderson', 25, '987-654-3210', '456 Elm St, Townsville'),
-  ('Eva Williams', 42, '555-123-4567', '789 Oak Ave, Villagetown'),
-  ('Daniel Harris', 28, '111-222-3333', '567 Pine Rd, Countryside'),
-  ('Sophia Martinez', 31, '999-888-7777', '789 Maple St, Suburbia'),
-  ('Liam Johnson', 19, '444-555-6666', '456 Birch Ln, Woodsville'),
-  ('Olivia Davis', 55, '777-666-5555', '987 Cedar Dr, Riverside'),
-  ('Noah Rodriguez', 37, '222-333-4444', '345 Willow Rd, Mountainside'),
-  ('Emma Wilson', 28, '777-999-1111', '789 Elm St, Metropolis'),
-  ('Aiden Brown', 33, '444-111-8888', '123 Oak Rd, Oceanview');
+INSERT INTO patients ("name", "age", "phoneNumber", "address", "doctorId") VALUES
+  ('John Doe', 30, '555-1234', '123 Main St', 1),
+  ('Jane Smith', 25, '555-5678', '456 Elm St', 2),
+  ('Michael Johnson', 40, '555-9876', '789 Oak St', 1),
+  ('Emily Davis', 28, '555-4321', '321 Pine St', 3),
+  ('David Wilson', 35, '555-8765', '654 Maple St', 2),
+  ('Sarah Lee', 29, '555-2345', '987 Birch St', 1),
+  ('Robert Brown', 45, '555-7654', '234 Cedar St', 3),
+  ('Jennifer Miller', 33, '555-3456', '567 Walnut St', 2),
+  ('William Martinez', 27, '555-6543', '890 Spruce St', 1),
+  ('Linda Taylor', 50, '555-5432', '1234 Fir St', 3);
+
 
 
 -- Insert 10 Receptionists
@@ -44,11 +44,11 @@ VALUES
 -- Insert 10 Prescriptions
 INSERT INTO prescriptions ("patientId", "doctorId", "content")
 VALUES
-  (1, 1, 'Take medication A once a day.'),
-  (2, 2, 'Follow up in a week. Prescription for pain relief.'),
-  (3, 3, 'Prescription for skin cream. Apply twice daily.'),
-  (4, 4, 'Medication for cold symptoms. Take as needed.'),
-  (5, 5, 'Pain reliever for headaches. Follow dosage instructions.'),
+  -- (1, 1, 'Take medication A once a day.'),
+  -- (2, 2, 'Follow up in a week. Prescription for pain relief.'),
+  -- (3, 3, 'Prescription for skin cream. Apply twice daily.'),
+  -- (4, 4, 'Medication for cold symptoms. Take as needed.'),
+  -- (5, 5, 'Pain reliever for headaches. Follow dosage instructions.'),
   (6, 6, 'Prescription for allergy relief.'),
   (7, 7, 'Eye drops for dry eyes. Apply before bedtime.'),
   (8, 8, 'Medication for hormone balance. Take daily.'),
@@ -58,7 +58,7 @@ VALUES
 -- TRUNCATE TABLE "primaryQuestionForm";
 -- DROP TABLE "primaryQuestionForm";
 
-INSERT INTO "primaryQuestionForm" ("receiptionistId", "patientId", "previousIssues", "previousConsultant", "currentIssues", "sleepMode", "depression", "ocd", "recommendation")
+INSERT INTO "primaryQuestionForm" ("receptionistId", "patientId", "previousIssues", "previousConsultant", "currentIssues", "sleepMode", "depression", "ocd", "recommendation")
 VALUES
   (1, 1, '{"Anxiety", "Depression"}', 'Dr. Smith', 'Trouble sleeping', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Try relaxation techniques and establish a sleep routine.'),
   (2, 2, '{"Headaches"}', 'Dr. Johnson', 'Back pain', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Physical therapy and rest.'),
