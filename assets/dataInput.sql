@@ -70,3 +70,17 @@ VALUES
   (8, 8, '{"Fatigue"}', 'Dr. Martinez', 'Low energy, mood swings', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Follow balanced diet, exercise, and sleep routine.'),
   (9, 9, '{"Throat pain"}', 'Dr. Turner', 'Sore throat, difficulty swallowing', 'good', '{"unstable", "irritated"}', '{"extra-washing"}', 'Rest, warm saltwater gargles, and hydrate.'),
   (10, 10, '{"Anxiety"}', 'Dr. Adams', 'Nervousness, restlessness', 'poor', '{"unstable", "irritated"}', '{"extra-washing"}', 'Practice mindfulness, consider therapy.');
+
+
+-- Truncate tables
+TRUNCATE TABLE "doctors" CASCADE;
+TRUNCATE TABLE "patients" CASCADE;
+TRUNCATE TABLE "receptionists" CASCADE;
+TRUNCATE TABLE "prescriptions" CASCADE;
+TRUNCATE TABLE "primaryQuestionForm" CASCADE;
+
+SELECT setval(pg_get_serial_sequence('doctors', 'id'), 1, false);
+SELECT setval(pg_get_serial_sequence('patients', 'id'), 1, false);
+SELECT setval(pg_get_serial_sequence('receptionists', 'id'), 1, false);
+SELECT setval(pg_get_serial_sequence('prescriptions', 'id'), 1, false);
+SELECT setval(pg_get_serial_sequence('"primaryQuestionForm"', 'id'), 1, false);
